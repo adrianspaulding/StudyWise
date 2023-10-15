@@ -17,4 +17,4 @@ An application design by students, for students, to aid them in their studying e
 
 -Please use ~80 characters as the maximum line length. Python, unlike C++ and other programming
  languages, will not just let you hit enter between operations to continue a line. You must use
- a backslash ('\\') then enter. If you aren't sure about what this means, please ask Adrian.
+ a backslash (\\\) then enter. If you aren't sure about what this means, please ask Adrian.
