@@ -32,7 +32,8 @@ class psychologySetWin(QMainWindow):
         widget.setLayout(layout)
         self.setCentralWidget(widget)
 
-        layout.add
+        layout.addWidget(Title)
+        button.addButton()
 
 app = QApplication(sys.argv)
 
