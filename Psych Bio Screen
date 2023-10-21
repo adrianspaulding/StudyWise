@@ -25,7 +25,8 @@ class psychologySetWin(QMainWindow):
             self.lable.setText("Psycology Sections")
             self.lable.setPointSize(30)
             self.lable.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        
+
+        layout = QVBoxLayout()
         widget = QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
