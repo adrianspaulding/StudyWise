@@ -27,6 +27,7 @@ class psychologySetWin(QMainWindow):
             self.lable.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
         layout = QVBoxLayout()
+        Buttons=QGridLayout()
         widget = QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
