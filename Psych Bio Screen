@@ -23,5 +23,6 @@ class psychologySetWin(QMainWindow):
         def initUI(self):
             self.lable = Qtwidgets.Qlabel(self)
             self.lable.setText("Psycology Sections")
-            self.lable.move(100,100)
+            self.lable.setPointSize(30)
+            self.lable.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
