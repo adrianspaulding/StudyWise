@@ -1,1 +1,26 @@
-import 
+import sys
+
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import (
+    QApplication,
+    QLabel,
+    QMainWindow,
+    QPushButton,
+    QTabWidget,
+    QWidget,
+)
+
+class psychologySetWin(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Psych Sections ")
+        self.initUI()
+        Title = Qlabel("Psych Sets")
+        font = Title.Font()
+        font = setPointSize(45)
+        def initUI(self):
+            self.lable = Qtwidgets.Qlabel(self)
+            self.lable.setText("Psycology Sections")
+            self.lable.move(100,100)
+
