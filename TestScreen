@@ -1,0 +1,84 @@
+#I had A LOT of trouble getting Qt to work, so I can't actually see this in the designer, so hopefully this works
+
+import sys
+
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QPushButton,
+    QLabel,
+    QVBoxLayout,
+    QHBoxLayout,
+    QStackedLayout,
+    QWidget
+)
+
+class TestWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        # Set window title
+        self.setWindowTitle("StudyWise")
+        
+        # Display title
+        mainText = QLabel("Practice Test")
+        font = mainText.font()
+        font.setPointSize(20)
+        mainText.setFont(font)
+        mainText.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        
+        # Question 
+        question = QLabel("Question Placeholder")
+        font = question.font()
+        font.setPointSize(28)
+        question.setFont(font)
+        question.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        
+        # Create layouts 
+        pageLayout = QVBoxLayout()
+        topButtonsLayout = QHBoxLayout()
+        bottomButtonsLayout = QHBoxLayout()
+        
+        # Create option A
+        btn = QPushButton("A")
+        btnSize = QSize(100,100)
+        btn.setFixedSize(btnSize)
+        topButtonsLayout.addWidget(btn)
+        
+        # Create option B
+        btn = QPushButton("B")
+        btnSize = QSize(100,100)
+        btn.setFixedSize(btnSize)
+        topButtonsLayout.addWidget(btn)
+        
+        # Create option C
+        btn = QPushButton("C")
+        btnSize = QSize(100,100)
+        btn.setFixedSize(btnSize)
+        bottomButtonsLayout.addWidget(btn)
+        
+        # Create option D
+        btn = QPushButton("D")
+        btnSize = QSize(100,100)
+        btn.setFixedSize(btnSize)
+        bottomButtonsLayout.addWidget(btn)
+        
+        #Organize elements
+        pageLayout.addWidget(mainText)
+        pageLayout.addWidget(question)
+        pageLayout.addLayout(topButtonsLayout)
+        pageLayout.addLayout(bottomButtonsLayout)
+        container = QWidget()
+        container.setLayout(pageLayout)
+
+        # Set the central widget of the Window.
+        self.setCentralWidget(container)
+
+
+app = QApplication(sys.argv)
+
+window = TestWindow()
+window.show()
+
+app.exec()
