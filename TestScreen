@@ -1,8 +1,5 @@
-#I had A LOT of trouble getting Qt to work, so I can't actually see this in the designer, so hopefully this works
-
 import sys
-
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -10,63 +7,83 @@ from PySide6.QtWidgets import (
     QLabel,
     QVBoxLayout,
     QHBoxLayout,
-    QStackedLayout,
-    QWidget
+    QWidget,
+    QMessageBox
 )
 
+#Practice Test Window
 class TestWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
         # Set window title
         self.setWindowTitle("StudyWise")
-        
-        # Display title
-        mainText = QLabel("Practice Test")
-        font = mainText.font()
-        font.setPointSize(20)
-        mainText.setFont(font)
-        mainText.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        
-        # Question 
-        question = QLabel("Question Placeholder")
-        font = question.font()
-        font.setPointSize(28)
-        question.setFont(font)
-        question.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        
+
+        # variable that is set through pop-up window
+        self.numberOfQuestions = None
+
         # Create layouts 
         pageLayout = QVBoxLayout()
         topButtonsLayout = QHBoxLayout()
         bottomButtonsLayout = QHBoxLayout()
         
+        # Practice test display
+        mainText = QLabel("Practice Test")
+        font = mainText.font()
+        font.setPointSize(10)
+        mainText.setFont(font)
+        mainText.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        
+        # Display the number of questions chosen
+        # I plan on editing this in the future to display the numbers of answered questions/number of total questions
+        self.numberDisplay = QLabel("Number of Questions: ")
+        font = self.numberDisplay.font()
+        font.setPointSize(13)
+        self.numberDisplay.setFont(font)
+        self.numberDisplay.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        
+        # Question display
+        # Need to make a list of questions and answers that this will chose from
+        self.question = QLabel("Question Placeholder")
+        font = self.question.font()
+        font.setPointSize(23)
+        self.question.setFont(font)
+        self.question.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+
+        #Updates the question to show which button was selected 
+        #Will be changed in the future to incorporate the previously mentioned list
+        def updateQuestion(selected):
+            newQuestion = f"Selected: {selected}"
+            self.question.setText(newQuestion)
+        
         # Create option A
-        btn = QPushButton("A")
-        btnSize = QSize(100,100)
-        btn.setFixedSize(btnSize)
-        topButtonsLayout.addWidget(btn)
+        btnA = QPushButton("A")
+        btnA.setFixedSize(100, 100)
+        topButtonsLayout.addWidget(btnA)
+        btnA.clicked.connect(lambda: updateQuestion("A"))
         
         # Create option B
-        btn = QPushButton("B")
-        btnSize = QSize(100,100)
-        btn.setFixedSize(btnSize)
-        topButtonsLayout.addWidget(btn)
+        btnB = QPushButton("B")
+        btnB.setFixedSize(100, 100)
+        topButtonsLayout.addWidget(btnB)
+        btnB.clicked.connect(lambda: updateQuestion("B"))
         
         # Create option C
-        btn = QPushButton("C")
-        btnSize = QSize(100,100)
-        btn.setFixedSize(btnSize)
-        bottomButtonsLayout.addWidget(btn)
+        btnC = QPushButton("C")
+        btnC.setFixedSize(100, 100)
+        bottomButtonsLayout.addWidget(btnC)
+        btnC.clicked.connect(lambda: updateQuestion("C"))
         
         # Create option D
-        btn = QPushButton("D")
-        btnSize = QSize(100,100)
-        btn.setFixedSize(btnSize)
-        bottomButtonsLayout.addWidget(btn)
+        btnD = QPushButton("D")
+        btnD.setFixedSize(100, 100)
+        bottomButtonsLayout.addWidget(btnD)
+        btnD.clicked.connect(lambda: updateQuestion("D"))
         
-        #Organize elements
+        # Organize elements
         pageLayout.addWidget(mainText)
-        pageLayout.addWidget(question)
+        pageLayout.addWidget(self.numberDisplay)
+        pageLayout.addWidget(self.question)
         pageLayout.addLayout(topButtonsLayout)
         pageLayout.addLayout(bottomButtonsLayout)
         container = QWidget()
@@ -75,6 +92,35 @@ class TestWindow(QMainWindow):
         # Set the central widget of the Window.
         self.setCentralWidget(container)
 
+        #Shows the pop-up on start
+        self.initialPopUp()
+
+    #A pop-up to ask how many questions the user would like
+    #This will potentially need to be changed if we entertain the idea of a timer
+    def initialPopUp(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Practice Test")
+        msg.setText("How many questions would you like in your practice test?")
+        
+        fiveButton = QPushButton("5")
+        tenButton = QPushButton("10")
+        twentyButton = QPushButton("20")
+
+        msg.addButton(fiveButton, QMessageBox.AcceptRole)
+        msg.addButton(tenButton, QMessageBox.AcceptRole)
+        msg.addButton(twentyButton, QMessageBox.AcceptRole)
+        
+        result = msg.exec()
+        
+        if msg.clickedButton() == fiveButton:
+            self.numberOfQuestions = "5"
+        elif msg.clickedButton() == tenButton:
+            self.numberOfQuestions = "10"
+        elif msg.clickedButton() == twentyButton:
+            self.numberOfQuestions = "20"
+
+        #Changes the numberDisplay in the main TestWindow
+        self.numberDisplay.setText(f"Questions: {self.numberOfQuestions}")
 
 app = QApplication(sys.argv)
 
