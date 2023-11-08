@@ -8,23 +8,30 @@ from PySide6.QtWidgets import (
     QPushButton,
     QTabWidget,
     QWidget,
+    QLabel,
+    QVBoxLayout,
+    QGridLayout
 )
 
-class psychologySetWin(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-
+        
+        """
+        def initUI(self):
+            self.label = Qtwidgets.QLabel(self)
+            self.label.setText("Psycology Sections")
+            self.label.setPointSize(30)
+            self.label.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        """
+        
         self.setWindowTitle("Psych Sections ")
-        self.initUI()
-        Title = Qlabel("Psych Sets")
-        font = Title.Font()
+        #self.initUI()
+        Title = QLabel("Psych Sets")
+        font = Title.font()
         font.setPointSize(45)
         Title.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        def initUI(self):
-            self.lable = Qtwidgets.Qlabel(self)
-            self.lable.setText("Psycology Sections")
-            self.lable.setPointSize(30)
-            self.lable.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        
 
         layout = QVBoxLayout()
         Button = QGridLayout()
@@ -33,7 +40,7 @@ class psychologySetWin(QMainWindow):
         self.setCentralWidget(widget)
 
         layout.addWidget(Title)
-        button.addButton()
+        #button.addButton()
 
 app = QApplication(sys.argv)
 
