@@ -18,9 +18,13 @@ class TestWindow(QMainWindow):
 
         # Set window title
         self.setWindowTitle("StudyWise")
+        self.resize(500,400)
 
         # variable that is set through pop-up window
-        self.numberOfQuestions = None
+        self.numberOfQuestions = -1   #-1 allows it to not be 0=0 in if statement
+        
+        # variable to keep track of number of questions answered
+        self.questionsAnswered = 0
 
         # Create layouts 
         pageLayout = QVBoxLayout()
@@ -30,15 +34,14 @@ class TestWindow(QMainWindow):
         # Practice test display
         mainText = QLabel("Practice Test")
         font = mainText.font()
-        font.setPointSize(10)
+        font.setPointSize(12)
         mainText.setFont(font)
         mainText.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         
         # Display the number of questions chosen
-        # I plan on editing this in the future to display the numbers of answered questions/number of total questions
         self.numberDisplay = QLabel("Number of Questions: ")
         font = self.numberDisplay.font()
-        font.setPointSize(13)
+        font.setPointSize(15)
         self.numberDisplay.setFont(font)
         self.numberDisplay.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         
@@ -46,39 +49,50 @@ class TestWindow(QMainWindow):
         # Need to make a list of questions and answers that this will chose from
         self.question = QLabel("Question Placeholder")
         font = self.question.font()
-        font.setPointSize(23)
+        font.setPointSize(22)
         self.question.setFont(font)
         self.question.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
-        #Updates the question to show which button was selected 
+        #Updates the question to show which button was selected. Progress updates inside question update
         #Will be changed in the future to incorporate the previously mentioned list
         def updateQuestion(selected):
-            newQuestion = f"Selected: {selected}"
-            self.question.setText(newQuestion)
+            self.questionsAnswered += 1
+            if self.questionsAnswered <= self.numberOfQuestions:
+                updateNumber()
+                newQuestion = f"Selected: {selected}"
+                self.question.setText(newQuestion)
+            else:
+                self.question.setText("Max reached. Will go to next screen")
+            
+        def updateNumber():
+            newNumber = f"Progress: {self.questionsAnswered}/{self.numberOfQuestions}"
+            self.numberDisplay.setText(newNumber)
         
         # Create option A
         btnA = QPushButton("A")
-        btnA.setFixedSize(100, 100)
+        btnA.setFixedSize(200, 200)
         topButtonsLayout.addWidget(btnA)
-        btnA.clicked.connect(lambda: updateQuestion("A"))
         
         # Create option B
         btnB = QPushButton("B")
-        btnB.setFixedSize(100, 100)
+        btnB.setFixedSize(200, 200)
         topButtonsLayout.addWidget(btnB)
-        btnB.clicked.connect(lambda: updateQuestion("B"))
         
         # Create option C
         btnC = QPushButton("C")
-        btnC.setFixedSize(100, 100)
+        btnC.setFixedSize(200, 200)
         bottomButtonsLayout.addWidget(btnC)
-        btnC.clicked.connect(lambda: updateQuestion("C"))
         
         # Create option D
         btnD = QPushButton("D")
-        btnD.setFixedSize(100, 100)
+        btnD.setFixedSize(200, 200)
         bottomButtonsLayout.addWidget(btnD)
-        btnD.clicked.connect(lambda: updateQuestion("D"))
+
+        # Button clicked events
+        btnA.clicked.connect(lambda: updateQuestion("A"))
+        btnB.clicked.connect(lambda: updateQuestion("B"))
+        btnC.clicked.connect(lambda: updateQuestion("C"))
+        btnD.clicked.connect(lambda: updateQuestion("D"))  
         
         # Organize elements
         pageLayout.addWidget(mainText)
@@ -104,23 +118,27 @@ class TestWindow(QMainWindow):
         
         fiveButton = QPushButton("5")
         tenButton = QPushButton("10")
+        fifteenButton = QPushButton("15")
         twentyButton = QPushButton("20")
 
         msg.addButton(fiveButton, QMessageBox.AcceptRole)
         msg.addButton(tenButton, QMessageBox.AcceptRole)
+        msg.addButton(fifteenButton, QMessageBox.AcceptRole)
         msg.addButton(twentyButton, QMessageBox.AcceptRole)
         
         result = msg.exec()
         
         if msg.clickedButton() == fiveButton:
-            self.numberOfQuestions = "5"
+            self.numberOfQuestions = 5
         elif msg.clickedButton() == tenButton:
-            self.numberOfQuestions = "10"
+            self.numberOfQuestions = 10
+        elif msg.clickedButton() == fifteenButton:
+            self.numberOfQuestions = 15
         elif msg.clickedButton() == twentyButton:
-            self.numberOfQuestions = "20"
+            self.numberOfQuestions = 20
 
-        #Changes the numberDisplay in the main TestWindow
-        self.numberDisplay.setText(f"Questions: {self.numberOfQuestions}")
+        #Changes the numberDisplay in the main TestWindow  (this is only for 0/number selected)
+        self.numberDisplay.setText(f"Progress: {self.questionsAnswered}/{self.numberOfQuestions}")
 
 app = QApplication(sys.argv)
 
