@@ -28,7 +28,7 @@ class MainWindow(QMainWindow):
         appName.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         
         # Create greeting message
-        user = "Adrian" # This should be changed to allow the user to enter their name
+        user = "Person" # This should be changed to allow the user to enter their name
         greetingMsg = QLabel("Hello, " + user)
         font = greetingMsg.font()
         font.setPointSize(28)
