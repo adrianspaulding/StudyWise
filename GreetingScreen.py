@@ -41,13 +41,13 @@ class MainWindow(QMainWindow):
         
         # Create Biology button
         btn = QPushButton("Biology")
-        btnSize = QSize(200,200)
+        btnSize = QSize(200, 200)
         btn.setFixedSize(btnSize)
         buttonLayout.addWidget(btn)
         
         # Create Psychology button
         btn = QPushButton("Psychology")
-        btnSize = QSize(200,200)
+        btnSize = QSize(200, 200)
         btn.setFixedSize(btnSize)
         buttonLayout.addWidget(btn)
         

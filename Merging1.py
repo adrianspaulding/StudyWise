@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (
     QLabel,
     QVBoxLayout,
     QHBoxLayout,
+    QGridLayout,
     QWidget,
     QMessageBox
 )
@@ -46,7 +47,10 @@ class MainWindow(QMainWindow):
 
     def show_biology_sets(self):
         # Implement logic to show biology sets window
-        pass
+        # This currently calls it but the window doesn't stay open ~AS
+        app = QApplication.instance()
+        window = BioSetWindow()
+        window.show()
 
     def show_psychology_sets(self):
         # Implement logic to show psychology sets window
@@ -131,7 +135,7 @@ def main():
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
-    app.exec_()
+    app.exec()
 
 if __name__ == "__main__":
     main()
