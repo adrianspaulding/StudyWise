@@ -1,5 +1,6 @@
 import sys
 import os
+import random
 
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtWidgets import (
@@ -207,6 +208,9 @@ class MainWindow(QMainWindow):
         
         # variable to keep track of number of questions answered
         self.questionsAnswered = 0
+        
+        # variable to keep track of number of answers answered correctly
+        self.numberCorrect = 0
 
         # Create layouts 
         pageLayout = QVBoxLayout()
@@ -227,54 +231,96 @@ class MainWindow(QMainWindow):
         self.numberDisplay.setFont(font)
         self.numberDisplay.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         
+        #NEEDS ACTUAL QUESTIONS AND ANSWERS
+        questions = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"]
+        answers = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"]
+        
+        doneQuestions = []  #list to append so questions aren't reused
+        
         # Question display
-        # Need to make a list of questions and answers that this will chose from
-        self.question = QLabel("Question Placeholder")
+        firstQuestion = random.choice(questions)
+        doneQuestions.append(firstQuestion)
+        self.question = QLabel(firstQuestion)
         font = self.question.font()
         font.setPointSize(22)
         self.question.setFont(font)
         self.question.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        
 
         # Updates the question to show which button was selected. Progress updates inside question update
-        # Will be changed in the future to incorporate the previously mentioned list
-        def updateQuestion(selected):
-            self.questionsAnswered += 1
-            if self.questionsAnswered <= self.numberOfQuestions:
+        def updateQuestion(selected,question):
+            if self.questionsAnswered < self.numberOfQuestions:
+                self.questionsAnswered += 1
+                if (answers.index(selected) == questions.index(question)):
+                    self.numberCorrect += 1
                 updateNumber()
-                newQuestion = f"Selected: {selected}"
+                newQuestion = random.choice(questions)
+                while newQuestion in doneQuestions:
+                    newQuestion = random.choice(questions)
+                doneQuestions.append(newQuestion)
                 self.question.setText(newQuestion)
+                updateAnswers(newQuestion)
+            #NEED TO GO TO SCORE SCREEN
+            #numberCorrect kept track of the score 
             else:
-                self.question.setText("Max reached. Will go to next screen")
+                self.question.setText(f"Max reached. Will go to next screen. Correct: {self.numberCorrect}")
             
         def updateNumber():
             newNumber = f"Progress: {self.questionsAnswered}/{self.numberOfQuestions}"
             self.numberDisplay.setText(newNumber)
-        
+            
+        #Updates the text in the answer buttons
+        #Currently does not account for answers being the same
+        def updateAnswers(matchingQuestion):
+            correctAnswer = random.randint(1,4)
+            if correctAnswer == 1:
+                self.btnA.setText(answers[questions.index(matchingQuestion)])
+                self.btnB.setText(random.choice(answers))
+                self.btnC.setText(random.choice(answers))
+                self.btnD.setText(random.choice(answers))
+            if correctAnswer == 2:
+                self.btnA.setText(random.choice(answers))
+                self.btnB.setText(answers[questions.index(matchingQuestion)])
+                self.btnC.setText(random.choice(answers))
+                self.btnD.setText(random.choice(answers))
+            if correctAnswer == 3:
+                self.btnA.setText(random.choice(answers))
+                self.btnB.setText(random.choice(answers))
+                self.btnC.setText(answers[questions.index(matchingQuestion)])
+                self.btnD.setText(random.choice(answers))
+            if correctAnswer == 4:
+                self.btnA.setText(random.choice(answers))
+                self.btnB.setText(random.choice(answers))
+                self.btnC.setText(random.choice(answers))
+                self.btnD.setText(answers[questions.index(matchingQuestion)])
+            
         # Create option A
-        btnA = QPushButton("A")
-        btnA.setFixedSize(200, 200)
-        topButtonsLayout.addWidget(btnA)
+        self.btnA = QPushButton()
+        self.btnA.setFixedSize(200, 200)
+        topButtonsLayout.addWidget(self.btnA)
         
         # Create option B
-        btnB = QPushButton("B")
-        btnB.setFixedSize(200, 200)
-        topButtonsLayout.addWidget(btnB)
+        self.btnB = QPushButton()
+        self.btnB.setFixedSize(200, 200)
+        topButtonsLayout.addWidget(self.btnB)
         
         # Create option C
-        btnC = QPushButton("C")
-        btnC.setFixedSize(200, 200)
-        bottomButtonsLayout.addWidget(btnC)
+        self.btnC = QPushButton()
+        self.btnC.setFixedSize(200, 200)
+        bottomButtonsLayout.addWidget(self.btnC)
         
         # Create option D
-        btnD = QPushButton("D")
-        btnD.setFixedSize(200, 200)
-        bottomButtonsLayout.addWidget(btnD)
+        self.btnD = QPushButton()
+        self.btnD.setFixedSize(200, 200)
+        bottomButtonsLayout.addWidget(self.btnD)
+        
+        updateAnswers(self.question.text())
 
         # Button clicked events
-        btnA.clicked.connect(lambda: updateQuestion("A"))
-        btnB.clicked.connect(lambda: updateQuestion("B"))
-        btnC.clicked.connect(lambda: updateQuestion("C"))
-        btnD.clicked.connect(lambda: updateQuestion("D"))  
+        self.btnA.clicked.connect(lambda: updateQuestion(self.btnA.text(),self.question.text()))
+        self.btnB.clicked.connect(lambda: updateQuestion(self.btnB.text(),self.question.text()))
+        self.btnC.clicked.connect(lambda: updateQuestion(self.btnC.text(),self.question.text()))
+        self.btnD.clicked.connect(lambda: updateQuestion(self.btnD.text(),self.question.text()))  
         
         # Organize elements
         pageLayout.addWidget(mainText)
@@ -290,8 +336,6 @@ class MainWindow(QMainWindow):
         
         # Add all to a screen list to allow for switching
         self.screenList.addWidget(testScreenContainer)
-
-        
 
     # A pop-up to ask how many questions the user would like
     # This will potentially need to be changed if we entertain the idea of a timer
@@ -355,5 +399,3 @@ window = MainWindow()
 window.show()
 
 app.exec()
-
-
