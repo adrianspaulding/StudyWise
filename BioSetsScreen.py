@@ -11,68 +11,92 @@ from PySide6.QtWidgets import (
      QGridLayout,
      QWidget
  )
+from PySide6.QtGui import QFont
 
 import sys
+import os
 
-# Create the BioSet Window
-class BioSetWindow (QMainWindow):
+class BioSetWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-
-        #Setting window title 
         self.setWindowTitle("Biology Focused Sets")
+        self.init_ui()
 
-        #Create screen title(display)
-        screenName = QLabel("Biology Study Sets")
-        font = screenName.font()
-        font.setPointSize(50)
-        screenName.setFont(font)
-        screenName.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+    def init_ui(self):
+        self.create_labels()
+        self.create_buttons()
+        self.create_layout()
 
-        #Create list title
-        titleName = QLabel("Unit Sections")
-        font = titleName.font()
-        font.setPointSize(38)
-        titleName.setFont(font)
-        titleName.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+    def create_labels(self):
+        screen_name = QLabel("Biology Study Sets")
+        screen_name.setFont(QFont("Arial", 50))
+        screen_name.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
-        #Layouts
-        pageLayout = QVBoxLayout()
-        buttonLayout = QGridLayout()
+        title_name = QLabel("Unit Sections")
+        title_name.setFont(QFont("Arial", 38))
+        title_name.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
 
+        self.screen_name = screen_name
+        self.title_name = title_name
 
-        #Create List Button 1
-        buttonLayout.addWidget(QPushButton("Unit 1: Bio Foundations"), 0, 1)
+    def create_buttons(self):
+        button_layout = QGridLayout()
 
+        buttons = [
+            QPushButton("Unit 1: Basic Anatomy", clicked=self.unit1_clicked),
+            QPushButton("Unit 2: Cells", clicked=self.unit2_clicked),
+            QPushButton("Unit 3: Botany", clicked=self.unit3_clicked),
+            QPushButton("Unit 4: Basic Genetics", clicked=self.unit4_clicked),
+        ]
 
-        #Create List Button 2
-        buttonLayout.addWidget(QPushButton("Unit 2: Intro to Cells"), 1, 1)
+        for row, button in enumerate(buttons):
+            button_layout.addWidget(button, row, 1)
 
+        self.buttons = button_layout
 
-        #Create List Button 3
-        buttonLayout.addWidget(QPushButton("Unit 3: Cell Reproduction"), 2, 1)
+    def create_layout(self):
+        main_layout = QVBoxLayout()
+        main_layout.addWidget(self.screen_name)
+        main_layout.addWidget(self.title_name)
+        main_layout.addLayout(self.buttons)
 
-
-        #Create List Button 4 
-        buttonLayout.addWidget(QPushButton("Unit 4: Basic Genetics"), 3, 1)
-
-
-        #Can add more sets later on if needed
-
-        #Set Widgets
-        pageLayout.addWidget(screenName)
-        pageLayout.addWidget(titleName)
-        pageLayout.addLayout(buttonLayout)
         container = QWidget()
-        container.setLayout(pageLayout)
-
-        
-        # Set the central widget of the Window.
+        container.setLayout(main_layout)
         self.setCentralWidget(container)
 
-app = QApplication(sys.argv)
+    def unit1_clicked(self):
+        print("Unit 1 button clicked!")
+        self.read_and_display_content("Anatomy.txt")
 
+    def unit2_clicked(self):
+        print("Unit 2 button clicked!")
+        self.read_and_display_content("Cell Biology.txt")
+
+    def unit3_clicked(self):
+        print("Unit 3 button clicked!")
+        self.read_and_display_content("Botany.txt")
+
+    def unit4_clicked(self):
+        print("Unit 4 button clicked!")
+        self.read_and_display_content("Genetics.txt")
+
+    def read_and_display_content(self, file_name):
+        try:
+            file_path = os.path.join(os.path.dirname(__file__), file_name)
+            with open(file_path, 'r', encoding='utf-8') as file:
+                content = file.readlines()
+
+            # Assuming the content is in the format "term:definition"
+            for line in content:
+                term, definition = line.strip().split(':')
+                print(f"Term: {term}, Definition: {definition}")
+
+            # You can modify this logic to display the content in your GUI instead of printing
+        except FileNotFoundError:
+            print(f"File {file_name} not found.")
+
+app = QApplication(sys.argv)
 window = BioSetWindow()
 window.show()
-
 app.exec()
+
