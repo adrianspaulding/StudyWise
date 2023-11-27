@@ -182,7 +182,7 @@ class MainWindow(QMainWindow):
         Button4.move(250,390)
         Button5.move(250,420)
         Button6.move(250,450
-        self.screenList.addWidget(PsyScreencontainer)
+        self.screenList.addWidget(psyScreencontainer)
         
         
         """
