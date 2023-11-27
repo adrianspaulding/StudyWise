@@ -1,0 +1,27 @@
+
+Gene: A segment of DNA that contains the instructions for making a specific protein or RNA molecule
+Genome: The complete set of an organism's genetic material, including all of its genes
+Allele: One of the different forms of a gene that can exist at a specific location on a chromosome
+Homozygous: When an individual has two identical alleles for a particular gene (eg, AA or aa)
+Heterozygous: When an individual has two different alleles for a particular gene (eg, Aa)
+Genotype: An organism's genetic makeup for a specific trait
+Phenotype: The observable physical or biochemical characteristics of an organism resulting from its genotype
+Dominant: An allele that is expressed as a trait when present in a heterozygous individual
+Recessive: An allele that is expressed as a trait only when present in a homozygous individual
+Pedigree: A diagram that shows the relationships and inheritance of genetic traits within a family
+Mutation: A permanent change in the DNA sequence of a gene or chromosome
+Genetic Variation: Differences in genetic makeup among individuals in a population
+Genetic Cross: The mating of two individuals to analyze or predict the genetic traits of their offspring
+Genetic Engineering: The manipulation of an organism's genes to produce desired characteristics
+Genetic Code: The set of rules by which information encoded within genetic material (DNA or RNA) is translated into proteins
+Chromosome: A thread-like structure made of DNA and proteins that carries genetic information
+Genetic Mapping: Determining the relative positions of genes on a chromosome
+Polygenic Inheritance: The inheritance of a trait controlled by multiple genes
+Codominance: A condition in which both alleles of a gene are expressed, resulting in a blended phenotype
+Mendelian Inheritance: The inheritance patterns described by Gregor Mendel, including dominant and recessive traits
+Genetic Counseling: A process of providing information and support to individuals or families with a genetic disorder or at risk of one
+Genome Sequencing: Determining the order of DNA nucleotides in an organism's genome
+Genetic Marker: A known DNA sequence used to identify a specific location in a genome
+Epigenetics: The study of heritable changes in gene expression that do not involve alterations to the DNA sequence
+Genetic Trait: A specific characteristic or feature that is inherited through genes, such as eye color or blood type
+

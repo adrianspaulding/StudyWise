@@ -1,0 +1,26 @@
+Cell: The fundamental unit of life, containing all the necessary structures and functions to sustain an organism
+Plasma Membrane: The outer boundary of a cell, composed of a lipid bilayer, that regulates the passage of substances in and out of the cell
+Nucleus: The central organelle that houses the cell's genetic material (DNA) and controls cell activities
+Cytoplasm: The gel-like substance within a cell that contains organelles and serves as the site of many cellular processes
+Organelle: Specialized structures within a cell that perform specific functions, such as the mitochondria for energy production
+Endoplasmic Reticulum (ER): A network of membranes involved in protein and lipid synthesis and transport within the cell
+Ribosome: Cellular structures responsible for protein synthesis by reading the information in RNA and assembling amino acids
+Golgi Apparatus: An organelle that modifies, sorts, and packages proteins and lipids for transport within or outside the cell
+Mitochondria: Organelles that produce energy (ATP) through cellular respiration
+Lysosome: Membrane-bound organelles containing digestive enzymes to break down waste materials and cellular debris
+Cytoskeleton: A network of protein filaments (microtubules, microfilaments, and intermediate filaments) that provides structural support and enables cellular movement
+Cilia and Flagella: Hair-like projections on the cell surface that are involved in movement and sensory functions
+Endocytosis: The process by which cells engulf external particles or fluids by enclosing them in vesicles formed from the cell membrane
+Exocytosis: The process by which cells release materials stored in vesicles by fusing the vesicle membrane with the cell membrane
+Nucleolus: A substructure within the nucleus responsible for ribosome production
+Chromatin: A complex of DNA and proteins that make up the genetic material in a non-dividing cell
+Microtubules: Protein filaments that make up part of the cytoskeleton and are involved in cellular structure and transport
+Cell Cycle: The series of events that lead to cell growth, division, and the production of two daughter cells
+Meiosis: The specialized cell division process that reduces the chromosome number by half to create gametes (sperm and egg cells)
+Mitosis: The process of cell division that results in two identical daughter cells for growth and repair
+Cell Adhesion: The ability of cells to stick together through various molecular interactions
+Phagocytosis: A type of endocytosis in which a cell engulfs large particles, such as bacteria or cellular debris
+Nuclear Envelope: The double membrane surrounding the nucleus that separates it from the cytoplasm
+Receptor Proteins: Cell surface proteins that bind to specific ligands (molecules) to initiate cellular responses
+Cellular Respiration: The metabolic process in which cells convert glucose and oxygen into energy, carbon dioxide, and water
+

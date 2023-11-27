@@ -1,0 +1,25 @@
+Botany: The scientific study of plants, including their structure, growth, reproduction, and classification
+Plant: A multicellular organism belonging to the kingdom Plantae, characterized by the ability to photosynthesize
+Photosynthesis: The process by which plants convert light energy into chemical energy (usually glucose) in the presence of chlorophyll
+Chlorophyll: A green pigment found in chloroplasts, responsible for capturing light energy during photosynthesis
+Cell Wall: A rigid outer layer surrounding plant cells, providing structural support and protection
+Stem: The main structural axis of a plant that supports leaves, flowers, and fruit
+Root: The part of a plant that typically grows below ground, absorbing water and nutrients
+Leaf: The primary site of photosynthesis in most plants, where chlorophyll is abundant
+Flower: The reproductive structure of angiosperms (flowering plants) that produces seeds and fruit
+Seed: A mature plant ovule capable of growing into a new plant
+Fruit: A mature ovary containing seeds, formed after the fertilization of a flower
+Botanical Classification: The system of organizing plants into hierarchical groups based on shared characteristics, such as kingdom, phylum, class, order, family, genus, and species
+Angiosperms: A class of plants that produce seeds enclosed in a fruit; they include most flowering plants
+Gymnosperms: A class of plants that produce seeds not enclosed in a fruit, including conifers and cycads
+Photosynthate: The products of photosynthesis, such as sugars and starches, used for energy and growth
+Xylem: Plant tissue responsible for transporting water and minerals from the roots to the rest of the plant
+Phloem: Plant tissue responsible for transporting sugars and other organic compounds throughout the plant
+Pollination: The transfer of pollen from the male reproductive part (anther) to the female reproductive part (stigma) of a flower
+Germination: The process of a seed sprouting and developing into a seedling
+Herbivory: The consumption of plant material by herbivores, such as animals that eat leaves or stems
+Botanical Garden: A place where a wide variety of plants are cultivated, studied, and displayed for education and research
+Biome: A large, naturally occurring community of flora and fauna adapted to a specific environment, such as a desert or rainforest
+Tropism: The growth or movement of a plant in response to a stimulus, such as light (phototropism) or gravity (gravitropism)
+Lignin: A complex polymer that provides rigidity to plant cell walls and is responsible for the woody texture in trees and shrubs
+Symbiosis: A mutually beneficial interaction between plants and other organisms, such as mycorrhizal associations between plant roots and fungi
