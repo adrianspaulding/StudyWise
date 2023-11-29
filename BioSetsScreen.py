@@ -16,6 +16,7 @@ from PySide6.QtGui import QFont
 import sys
 import os
 
+#Class for the screen
 class BioSetWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -41,14 +42,14 @@ class BioSetWindow(QMainWindow):
 
     def create_buttons(self):
         button_layout = QGridLayout()
-
+        #creates each button
         buttons = [
             QPushButton("Unit 1: Basic Anatomy", clicked=self.unit1_clicked),
-            QPushButton("Unit 2: Cells", clicked=self.unit2_clicked),
+            QPushButton("Unit 2: Cell Biology", clicked=self.unit2_clicked),
             QPushButton("Unit 3: Botany", clicked=self.unit3_clicked),
             QPushButton("Unit 4: Basic Genetics", clicked=self.unit4_clicked),
         ]
-
+        #adds a consistent button layout
         for row, button in enumerate(buttons):
             button_layout.addWidget(button, row, 1)
 
@@ -64,34 +65,44 @@ class BioSetWindow(QMainWindow):
         container.setLayout(main_layout)
         self.setCentralWidget(container)
 
+    #calls read_and_display for each button 
     def unit1_clicked(self):
-        print("Unit 1 button clicked!")
+        #print("Unit 1 button clicked!")
         self.read_and_display_content("Anatomy.txt")
 
     def unit2_clicked(self):
-        print("Unit 2 button clicked!")
+        #print("Unit 2 button clicked!")
         self.read_and_display_content("Cell Biology.txt")
 
     def unit3_clicked(self):
-        print("Unit 3 button clicked!")
+        #print("Unit 3 button clicked!")
         self.read_and_display_content("Botany.txt")
 
     def unit4_clicked(self):
-        print("Unit 4 button clicked!")
+        #print("Unit 4 button clicked!")
         self.read_and_display_content("Genetics.txt")
 
     def read_and_display_content(self, file_name):
+        term_list = []
+        definition_list = []
         try:
+            #reads the file line by line
             file_path = os.path.join(os.path.dirname(__file__), file_name)
             with open(file_path, 'r', encoding='utf-8') as file:
                 content = file.readlines()
 
-            # Assuming the content is in the format "term:definition"
+            #Puts each line into lists
             for line in content:
+                #splits term and definition
                 term, definition = line.strip().split(':')
-                print(f"Term: {term}, Definition: {definition}")
+                term_list.append(term)
+                definition_list.append(definition)
 
-            # You can modify this logic to display the content in your GUI instead of printing
+            print(term_list)
+            print(definition_list)
+            return term_list, definition_list
+        
+        #if something goes completely wrong
         except FileNotFoundError:
             print(f"File {file_name} not found.")
 
@@ -99,4 +110,3 @@ app = QApplication(sys.argv)
 window = BioSetWindow()
 window.show()
 app.exec()
-
