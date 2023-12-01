@@ -1,0 +1,25 @@
+Neroscience: any or all of the sciences which deal with the structure of the nervous system 
+Neuron: a nerve cell; the basic building block of the nervous system.
+Dendrite: the bushy, branching extensions of a neuron that receive messages and conduct impulses 
+Axon: the extension of a neuron, ending in branching terminal fibers
+Efferent Neurons: neurons that carry outgoing information from the ventral nervous system 
+Interneurons: central nervous system neurons that internally communicate between sensory inputs 
+Synapse: the junction between the axon tip of the sending neuron and the dendrite 
+Action Potential: a neural impulse; a brief electrical charge that travels down an axon. 
+Refractory Period: a resting period after orgasm
+All-Or-Nothing Principle: A neuron will either fire or not; no in between.
+Glial Cells: Cells in the nervous system that support, nourish, and protect neurons.
+Myelin Shealth: a layer of fatty tissue segmentally encasing the fibers of many neurons
+Neurotransmitters: chemical messengers that traverse the synaptic gaps between neurons
+Agonists: mimics a neurotransmitter, like a medication
+Antagonists: blocks neurotransmitter
+Acetylcholine: a neurotransmitter that enables learning and also triggers muscle contraction
+Norepinephrine: functions- physcial arousal, mood, learning
+Dopamine: function-pleasure/reward, movement
+Seratonin: function- emotional state/mood, sleep
+GABA: function- best known inhibitory transmitter, sleep
+Glutamate: function-major excitatory neurotransmitter, learning & memory
+Endorphins: function- pain control, pleasure
+Peripheral Nervous System: motor neurons that connect the central nervous system to the body
+Somatic Nervous System: division of the peripheral nervous system 
+Autonomic Nervous System: the part of the peripheral nervous system that controls the glands
