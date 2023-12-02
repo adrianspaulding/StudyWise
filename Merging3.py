@@ -23,9 +23,11 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         
-        self.setMinimumWidth(640)
-        self.setMinimumHeight(550)
+        #Set fixed window size
+        self.setMinimumSize(640, 575)
+        self.setMaximumSize(640, 575)
         
+        #Set window title to StudyWise
         self.setWindowTitle("StudyWise")
         
         #Initializing variables to be used in the test screen. Need to be in main for multiple function usage
@@ -34,10 +36,10 @@ class MainWindow(QMainWindow):
         self.questions = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"]
         self.answers = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"]
         
-        
         #Creating a StackedLayout for all the screens to go in
         self.screenList = QStackedLayout()
         
+        #Create and add each screen to screenList
         self.screenList.addWidget(self.createGreetingScreen())  #Index 0
         self.screenList.addWidget(self.createBioScreen())       #Index 1
         self.screenList.addWidget(self.createPsychScreen())     #Index 2
@@ -58,18 +60,12 @@ class MainWindow(QMainWindow):
         #Sets username based on name in os
         username = os.getlogin()
         
-        # Create app title to display
-        appName = QLabel("StudyWise")
-        font = appName.font()
-        font.setPointSize(60)
-        appName.setFont(font)
-        appName.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
-        
         # Create app title with image
-        #appImageLabel = QLabel()
-        #pixmap = QPixmap("path") 
-        #appImageLabel.setPixmap(pixmap)
-        #appImageLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        appImageLabel = QLabel()
+        pixmap = QPixmap("StudyWiseSelectLogo.png")
+        pixmap.setDevicePixelRatio(1.2)
+        appImageLabel.setPixmap(pixmap)
+        appImageLabel.setAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
         
         # Create greeting message
         greetingMsg = QLabel("Hello, " + username)
@@ -97,7 +93,7 @@ class MainWindow(QMainWindow):
         buttonLayout.addWidget(psychButton)
         
         # Organize elements
-        pageLayout.addWidget(appName)
+        pageLayout.addWidget(appImageLabel)
         pageLayout.addWidget(greetingMsg)
         pageLayout.addLayout(buttonLayout)
         
@@ -128,13 +124,13 @@ class MainWindow(QMainWindow):
         
         # Create buttons
         bioUnit1Button = QPushButton("Unit 1: Basic Anatomy")
-        bioUnit1Button.pressed.connect(self.initialPopUp)
+        bioUnit1Button.pressed.connect(lambda: self.buttonClicked("Anatomy.txt"))
         bioUnit2Button = QPushButton("Unit 2: Cell Biology")
-        bioUnit2Button.pressed.connect(self.initialPopUp)
+        bioUnit2Button.pressed.connect(lambda: self.buttonClicked("Cell Biology.txt"))
         bioUnit3Button = QPushButton("Unit 3: Botany")
-        bioUnit3Button.pressed.connect(self.initialPopUp)
+        bioUnit3Button.pressed.connect(lambda: self.buttonClicked("Botany.txt"))
         bioUnit4Button = QPushButton("Unit 4: Basic Genetics")
-        bioUnit4Button.pressed.connect(self.initialPopUp)
+        bioUnit4Button.pressed.connect(lambda: self.buttonClicked("Genetics.txt"))
         
         # Add buttons to layout
         buttonLayout.addWidget(bioUnit1Button, 0, 1)
@@ -173,11 +169,11 @@ class MainWindow(QMainWindow):
         
         # Create buttons
         psychUnit1Button = QPushButton("Unit 1: Scientific Foundations")
-        psychUnit1Button.pressed.connect(self.initialPopUp)
+        psychUnit1Button.pressed.connect(lambda: self.buttonClicked("Scientific Foundations.txt"))
         psychUnit2Button = QPushButton("Unit 2: Social/Cognitive Aspects")
-        psychUnit2Button.pressed.connect(self.initialPopUp)
+        psychUnit2Button.pressed.connect(lambda: self.buttonClicked("SocialAndCognitiveAspects.txt"))
         psychUnit3Button = QPushButton("Unit 3: Biological Bases of Behavior")
-        psychUnit3Button.pressed.connect(self.initialPopUp)
+        psychUnit3Button.pressed.connect(lambda: self.buttonClicked("BiologicalBasesofBehavior.txt"))
         
         # Add buttons to layout
         buttonLayout.addWidget(psychUnit1Button, 0, 1)
@@ -228,7 +224,13 @@ class MainWindow(QMainWindow):
         self.resetStats()   #Reset variables to zero or empty to allow for reruns of the test screen
         self.updateNumber() #Display the correct text in the "progress" of the test screen
         
-        # Change to test screen
+        #Create new test screen to refresh questions
+        newTestScreen = self.createTestScreen()
+        self.screenList.setCurrentIndex(3)
+        self.screenList.removeWidget(self.screenList.currentWidget())
+        self.screenList.insertWidget(3, newTestScreen)
+        
+        #Change to test screen
         self.showScreen(3)
         
     #Resets variables to zero for multiple reruns
@@ -399,6 +401,29 @@ class MainWindow(QMainWindow):
             self.btnC.setText(random.choice(self.answers))
             self.btnD.setText(self.answers[self.questions.index(matchingQuestion)])
       
+    #Button clicking and question grabbing
+    def buttonClicked(self, fileToRead):
+        self.questions = []
+        self.answers = []
+        try:
+            #reads the file line by line
+            file_path = os.path.join(os.path.dirname(__file__), fileToRead)
+            with open(file_path, 'r', encoding='utf-8') as file:
+                content = file.readlines()
+
+            #Puts each line into lists
+            for line in content:
+                #splits term and definition
+                term, definition = line.strip().split(':')
+                self.questions.append(term)
+                self.answers.append(definition)
+        
+        #if something goes completely wrong
+        except FileNotFoundError:
+            print(f"File {fileToRead} not found.")
+        
+        #Call initialPopUp to get number of questions
+        self.initialPopUp()
         
 app = QApplication(sys.argv)
 window = MainWindow()
