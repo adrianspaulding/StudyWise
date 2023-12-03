@@ -360,22 +360,15 @@ class MainWindow(QMainWindow):
     #Handles what to call when the answer buttons in test screen are pressed
     def handleButtons(self, button):
     # Sends the index of the selected answer and index of the displayed question into updateQuestion()
-        print("Button Clicked")
-        print("Correct Answer Index:", self.doneAnswers.index(self.answers[self.questions.index(self.question.text())]))
-        print("Selected Answer Index:", self.doneAnswers.index(self.button_answer_mapping[button]))
         self.updateQuestion(self.doneAnswers.index(self.button_answer_mapping[button]), self.questions.index(self.question.text()))
         if (self.questionsAnswered + 1) > self.numberOfQuestions:
             self.showScreen(4)  #goes to score screen
 
     #Updates the text of the question displayed
     def updateQuestion(self, answerIndex, matchingQuestionIndex):
-        print("Updating Question")
-        print("Answer Index:", answerIndex)
-        print("Matching Question Index:", matchingQuestionIndex)
         self.questionsAnswered += 1  # Increments the number of questions the user answered
         if answerIndex == self.doneAnswers.index(self.answers[self.questions.index(self.question.text())]):
             self.numberCorrect += 1  # Increments the number the user got correct
-        print("Number Correct:", self.numberCorrect)
         newQuestion = random.choice(self.questions)  # Selects a new question from the list to display
         while newQuestion in self.doneQuestions:  # If the randomly chosen question has already been selected
             newQuestion = random.choice(self.questions)  # get a new one
