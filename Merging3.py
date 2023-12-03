@@ -379,27 +379,101 @@ class MainWindow(QMainWindow):
 
     #Updates the answers displayed in the buttons in the test screen
     def updateAnswers(self, matchingQuestion):
+        self.doneAnswers = []  #creates an empty list to add done answers to, resets each round
         correctAnswer = random.randint(1, 4)  #Chooses which button will be the correct answer
         if correctAnswer == 1:
-            self.btnA.setText(self.answers[self.questions.index(matchingQuestion)])
-            self.btnB.setText(random.choice(self.answers))
-            self.btnC.setText(random.choice(self.answers))
-            self.btnD.setText(random.choice(self.answers))
+            self.a = self.answers[self.questions.index(matchingQuestion)]
+            self.btnA.setText(self.a)
+            self.doneAnswers.append(self.a)
+            
+            self.b = random.choice(self.answers)
+            while self.b in self.doneAnswers:
+                self.b = random.choice(self.answers)
+            self.btnB.setText(self.b)
+            self.doneAnswers.append(self.b)
+            
+            self.c = random.choice(self.answers)
+            while self.c in self.doneAnswers:
+                self.c = random.choice(self.answers)
+            self.btnC.setText(self.c)
+            self.doneAnswers.append(self.c)
+            
+            self.d = random.choice(self.answers)
+            while self.d in self.doneAnswers:
+                self.d = random.choice(self.answers)
+            self.btnD.setText(self.d)
+            self.doneAnswers.append(self.d)
+            
         if correctAnswer == 2:
-            self.btnA.setText(random.choice(self.answers))
-            self.btnB.setText(self.answers[self.questions.index(matchingQuestion)])
-            self.btnC.setText(random.choice(self.answers))
-            self.btnD.setText(random.choice(self.answers))
+            self.b = self.answers[self.questions.index(matchingQuestion)]
+            self.btnB.setText(self.b)
+            self.doneAnswers.append(self.b)
+            
+            self.a = random.choice(self.answers)
+            while self.a in self.doneAnswers:
+                self.a = random.choice(self.answers)
+            self.btnA.setText(self.a)
+            self.doneAnswers.append(self.a)
+            
+            self.c = random.choice(self.answers)
+            while self.c in self.doneAnswers:
+                self.c = random.choice(self.answers)
+            self.btnC.setText(self.c)
+            self.doneAnswers.append(self.c)
+            
+            self.d = random.choice(self.answers)
+            while self.d in self.doneAnswers:
+                self.d = random.choice(self.answers)
+            self.btnD.setText(self.d)
+            self.doneAnswers.append(self.d)
+            
         if correctAnswer == 3:
-            self.btnA.setText(random.choice(self.answers))
-            self.btnB.setText(random.choice(self.answers))
-            self.btnC.setText(self.answers[self.questions.index(matchingQuestion)])
-            self.btnD.setText(random.choice(self.answers))
+            
+            self.c = self.answers[self.questions.index(matchingQuestion)]
+            self.btnC.setText(self.c)
+            self.doneAnswers.append(self.c)
+            
+            self.b = random.choice(self.answers)
+            while self.b in self.doneAnswers:
+                self.b = random.choice(self.answers)
+            self.btnB.setText(self.b)
+            self.doneAnswers.append(self.b)
+            
+            self.a = random.choice(self.answers)
+            while self.a in self.doneAnswers:
+                self.a = random.choice(self.answers)
+            self.btnA.setText(self.a)
+            self.doneAnswers.append(self.a)
+            
+            self.d = random.choice(self.answers)
+            while self.d in self.doneAnswers:
+                self.d = random.choice(self.answers)
+            self.btnD.setText(self.d)
+            self.doneAnswers.append(self.d)
+            
         if correctAnswer == 4:
-            self.btnA.setText(random.choice(self.answers))
-            self.btnB.setText(random.choice(self.answers))
-            self.btnC.setText(random.choice(self.answers))
-            self.btnD.setText(self.answers[self.questions.index(matchingQuestion)])
+            
+            self.d = self.answers[self.questions.index(matchingQuestion)]
+            self.btnD.setText(self.d)
+            self.doneAnswers.append(self.d)
+            
+            self.b = random.choice(self.answers)
+            while self.b in self.doneAnswers:
+                self.b = random.choice(self.answers)
+            self.btnB.setText(self.b)
+            self.doneAnswers.append(self.b)
+            
+            self.c = random.choice(self.answers)
+            while self.c in self.doneAnswers:
+                self.c = random.choice(self.answers)
+            self.btnC.setText(self.c)
+            self.doneAnswers.append(self.c)
+            
+            self.a = random.choice(self.answers)
+            while self.a in self.doneAnswers:
+                self.a = random.choice(self.answers)
+            self.btnA.setText(self.a)
+            self.doneAnswers.append(self.a)
       
     #Button clicking and question grabbing
     def buttonClicked(self, fileToRead):
