@@ -290,6 +290,14 @@ class MainWindow(QMainWindow):
         self.btnD = QPushButton()
         self.btnD.setFixedSize(200, 200)
         bottomButtonsLayout.addWidget(self.btnD)
+        
+        # Dictionary to map buttons to their corresponding answers
+        self.button_answer_mapping = {
+            self.btnA: None,
+            self.btnB: None,
+            self.btnC: None,
+            self.btnD: None,
+        }
 
         # Connect button click events
         self.btnA.clicked.connect(lambda: self.handleButtons(self.btnA))
@@ -351,26 +359,32 @@ class MainWindow(QMainWindow):
         
     #Handles what to call when the answer buttons in test screen are pressed
     def handleButtons(self, button):
-        #Sends the index of the selected answer and index of the displayed question into updateQuestion()
-        self.updateQuestion(self.answers.index(button.text()), self.questions.index(self.question.text())) 
+    # Sends the index of the selected answer and index of the displayed question into updateQuestion()
+        print("Button Clicked")
+        print("Correct Answer Index:", self.doneAnswers.index(self.answers[self.questions.index(self.question.text())]))
+        print("Selected Answer Index:", self.doneAnswers.index(self.button_answer_mapping[button]))
+        self.updateQuestion(self.doneAnswers.index(self.button_answer_mapping[button]), self.questions.index(self.question.text()))
         if (self.questionsAnswered + 1) > self.numberOfQuestions:
             self.showScreen(4)  #goes to score screen
 
     #Updates the text of the question displayed
-    def updateQuestion(self, answerIndex, questionIndex):
-        self.questionsAnswered += 1  #Increments the number of questions the user answered
-        if answerIndex == questionIndex:  
-            self.numberCorrect += 1  #Increments the number the user got correct
-        newQuestion = random.choice(self.questions)  #Selects a new question from the list to display
-        while newQuestion in self.doneQuestions:  #If the randomly chosen question has already been selected
-            newQuestion = random.choice(self.questions)  #get a new one
-        self.doneQuestions.append(newQuestion)  #append the doneQuestions list by that new question
-        self.question.setText(newQuestion) #displays the new question
-        self.updateAnswers(newQuestion)  #update the displayed answers based on the new question
-        self.updateNumber()  #updates the displayed progress
-        
-        #Updates the score text in the score screen. Ensures the score is always up to date
-        self.yourScoreLabel.setText(f"Score: {self.numberCorrect}/{self.numberOfQuestions}") 
+    def updateQuestion(self, answerIndex, matchingQuestionIndex):
+        print("Updating Question")
+        print("Answer Index:", answerIndex)
+        print("Matching Question Index:", matchingQuestionIndex)
+        self.questionsAnswered += 1  # Increments the number of questions the user answered
+        if answerIndex == self.doneAnswers.index(self.answers[self.questions.index(self.question.text())]):
+            self.numberCorrect += 1  # Increments the number the user got correct
+        print("Number Correct:", self.numberCorrect)
+        newQuestion = random.choice(self.questions)  # Selects a new question from the list to display
+        while newQuestion in self.doneQuestions:  # If the randomly chosen question has already been selected
+            newQuestion = random.choice(self.questions)  # get a new one
+        self.doneQuestions.append(newQuestion)  # append the doneQuestions list by that new question
+        self.question.setText(newQuestion)  # displays the new question
+        self.updateAnswers(newQuestion)  # update the displayed answers based on the new question
+        self.updateNumber()  # updates the displayed progress
+    # Updates the score text in the score screen. Ensures the score is always up to date
+        self.yourScoreLabel.setText(f"Score: {self.numberCorrect}/{self.numberOfQuestions}")
 
     #Updates the progress display in the test screen
     def updateNumber(self):
@@ -379,101 +393,138 @@ class MainWindow(QMainWindow):
 
     #Updates the answers displayed in the buttons in the test screen
     def updateAnswers(self, matchingQuestion):
-        self.doneAnswers = []  #creates an empty list to add done answers to, resets each round
-        correctAnswer = random.randint(1, 4)  #Chooses which button will be the correct answer
+    
+        self.doneAnswers = []  # creates an empty list to add done answers to, resets each round
+        correctAnswer = random.randint(1, 4)  # Chooses which button will be the correct answer
+
+        # Clear existing layouts in buttons
+        self.clearLayout(self.btnA)
+        self.clearLayout(self.btnB)
+        self.clearLayout(self.btnC)
+        self.clearLayout(self.btnD)
+
         if correctAnswer == 1:
             self.a = self.answers[self.questions.index(matchingQuestion)]
-            self.btnA.setText(self.a)
             self.doneAnswers.append(self.a)
-            
+            self.button_answer_mapping[self.btnA] = self.a
+            self.addWrappedTextButton(self.btnA, self.a)
+
             self.b = random.choice(self.answers)
             while self.b in self.doneAnswers:
                 self.b = random.choice(self.answers)
-            self.btnB.setText(self.b)
             self.doneAnswers.append(self.b)
-            
+            self.button_answer_mapping[self.btnB] = self.b
+            self.addWrappedTextButton(self.btnB, self.b)
+
             self.c = random.choice(self.answers)
             while self.c in self.doneAnswers:
                 self.c = random.choice(self.answers)
-            self.btnC.setText(self.c)
             self.doneAnswers.append(self.c)
-            
+            self.button_answer_mapping[self.btnC] = self.c
+            self.addWrappedTextButton(self.btnC, self.c)
+
             self.d = random.choice(self.answers)
             while self.d in self.doneAnswers:
                 self.d = random.choice(self.answers)
-            self.btnD.setText(self.d)
             self.doneAnswers.append(self.d)
+            self.button_answer_mapping[self.btnD] = self.d
+            self.addWrappedTextButton(self.btnD, self.d)
             
         if correctAnswer == 2:
             self.b = self.answers[self.questions.index(matchingQuestion)]
-            self.btnB.setText(self.b)
             self.doneAnswers.append(self.b)
-            
+            self.button_answer_mapping[self.btnB] = self.b
+            self.addWrappedTextButton(self.btnB, self.b)
+
             self.a = random.choice(self.answers)
             while self.a in self.doneAnswers:
                 self.a = random.choice(self.answers)
-            self.btnA.setText(self.a)
             self.doneAnswers.append(self.a)
-            
+            self.button_answer_mapping[self.btnA] = self.a
+            self.addWrappedTextButton(self.btnA, self.a)
+
             self.c = random.choice(self.answers)
             while self.c in self.doneAnswers:
                 self.c = random.choice(self.answers)
-            self.btnC.setText(self.c)
             self.doneAnswers.append(self.c)
-            
+            self.button_answer_mapping[self.btnC] = self.c
+            self.addWrappedTextButton(self.btnC, self.c)
+
             self.d = random.choice(self.answers)
             while self.d in self.doneAnswers:
                 self.d = random.choice(self.answers)
-            self.btnD.setText(self.d)
             self.doneAnswers.append(self.d)
+            self.button_answer_mapping[self.btnD] = self.d
+            self.addWrappedTextButton(self.btnD, self.d)
             
         if correctAnswer == 3:
-            
             self.c = self.answers[self.questions.index(matchingQuestion)]
-            self.btnC.setText(self.c)
             self.doneAnswers.append(self.c)
-            
-            self.b = random.choice(self.answers)
-            while self.b in self.doneAnswers:
-                self.b = random.choice(self.answers)
-            self.btnB.setText(self.b)
-            self.doneAnswers.append(self.b)
-            
+            self.button_answer_mapping[self.btnC] = self.c
+            self.addWrappedTextButton(self.btnC, self.c)
+
             self.a = random.choice(self.answers)
             while self.a in self.doneAnswers:
                 self.a = random.choice(self.answers)
-            self.btnA.setText(self.a)
             self.doneAnswers.append(self.a)
-            
+            self.button_answer_mapping[self.btnA] = self.a
+            self.addWrappedTextButton(self.btnA, self.a)
+
+            self.b = random.choice(self.answers)
+            while self.b in self.doneAnswers:
+                self.b = random.choice(self.answers)
+            self.doneAnswers.append(self.b)
+            self.button_answer_mapping[self.btnB] = self.b
+            self.addWrappedTextButton(self.btnB, self.b)
+
             self.d = random.choice(self.answers)
             while self.d in self.doneAnswers:
                 self.d = random.choice(self.answers)
-            self.btnD.setText(self.d)
             self.doneAnswers.append(self.d)
+            self.button_answer_mapping[self.btnD] = self.d
+            self.addWrappedTextButton(self.btnD, self.d)
             
         if correctAnswer == 4:
-            
             self.d = self.answers[self.questions.index(matchingQuestion)]
-            self.btnD.setText(self.d)
             self.doneAnswers.append(self.d)
-            
-            self.b = random.choice(self.answers)
-            while self.b in self.doneAnswers:
-                self.b = random.choice(self.answers)
-            self.btnB.setText(self.b)
-            self.doneAnswers.append(self.b)
-            
-            self.c = random.choice(self.answers)
-            while self.c in self.doneAnswers:
-                self.c = random.choice(self.answers)
-            self.btnC.setText(self.c)
-            self.doneAnswers.append(self.c)
-            
+            self.button_answer_mapping[self.btnD] = self.d
+            self.addWrappedTextButton(self.btnD, self.d)
+
             self.a = random.choice(self.answers)
             while self.a in self.doneAnswers:
                 self.a = random.choice(self.answers)
-            self.btnA.setText(self.a)
             self.doneAnswers.append(self.a)
+            self.button_answer_mapping[self.btnA] = self.a
+            self.addWrappedTextButton(self.btnA, self.a)
+
+            self.c = random.choice(self.answers)
+            while self.c in self.doneAnswers:
+                self.c = random.choice(self.answers)
+            self.doneAnswers.append(self.c)
+            self.button_answer_mapping[self.btnC] = self.c
+            self.addWrappedTextButton(self.btnC, self.c)
+
+            self.b = random.choice(self.answers)
+            while self.b in self.doneAnswers:
+                self.b = random.choice(self.answers)
+            self.doneAnswers.append(self.b)
+            self.button_answer_mapping[self.btnB] = self.b
+            self.addWrappedTextButton(self.btnB, self.b)
+
+    def clearLayout(self, widget):
+        if widget.layout():
+            while widget.layout().count():
+                item = widget.layout().takeAt(0)
+                sub_widget = item.widget()
+                if sub_widget:
+                    sub_widget.deleteLater()
+            
+    def addWrappedTextButton(self, button, text):
+        label = QLabel(text)
+        label.setAlignment(Qt.AlignCenter)
+        label.setWordWrap(True)
+        button.setLayout(QVBoxLayout())
+        button.layout().addWidget(label)
       
     #Button clicking and question grabbing
     def buttonClicked(self, fileToRead):
