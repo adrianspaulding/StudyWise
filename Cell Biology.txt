@@ -23,5 +23,3 @@ Phagocytosis: A type of endocytosis in which a cell engulfs large particles
 Nuclear Envelope: Double membrane surrounding the nucleus that separates it from the cytoplasm
 Receptor Proteins: Cell surface proteins that bind to specific ligands to initiate responses
 Cellular Respiration: The process in which cells convert glucose and oxygen into energy
-
-

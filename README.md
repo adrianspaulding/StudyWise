@@ -1,5 +1,5 @@
 # StudyWise
-An application design by students, for students, to aid them in their studying endeavors
+An application designed by students, for students, to aid them in their studying endeavors
 
 # General Thoughts and Recommendations for Programming Style
 

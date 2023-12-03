@@ -1,4 +1,3 @@
-
 Gene: A segment of DNA that contains the instructions for making a specific protein or RNA molecule
 Genome: The complete set of an organism's genetic material, including all of its genes
 Allele: One of the different forms of a gene that can exist at a specific location on a chromosome
@@ -24,4 +23,3 @@ Genome Sequencing: Determining the order of DNA nucleotides in an organism's gen
 Genetic Marker: A known DNA sequence used to identify a specific location in a genome
 Epigenetics: The study of heritable changes in gene expression that do not involve alterations to the DNA sequence
 Genetic Trait: A specific characteristic or feature that is inherited through genes, such as eye color or blood type
-
