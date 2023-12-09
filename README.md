@@ -1,7 +1,7 @@
 # StudyWise
 An application designed by students, for students, to aid them in their studying endeavors
 
-# General Thoughts and Recommendations for Programming Style
+# General Thoughts and Recommendations for Programming Style (if you want to contribute)
 
 -Please use 4 spaces for indentation levels. Most coding environments have an option to where 
  you can change the tab setting to insert 4 spaces. Replit defaults to 2 spaces, so if you use
